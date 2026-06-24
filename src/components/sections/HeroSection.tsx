@@ -137,40 +137,84 @@ export default function HeroSection() {
         </div>
 
         {/* Right: Abstract Visual Composition */}
-        <div className="relative h-[400px] md:h-[500px] w-full hidden lg:flex items-center justify-center perspective-[1000px]">
+        <div className="relative h-[400px] md:h-[500px] w-full hidden lg:flex items-center justify-center perspective-[1000px] select-none pointer-events-none">
           
           {/* Core Glowing Orb */}
           <div className="absolute center w-32 h-32 bg-[#00D4FF] rounded-full filter blur-[40px] opacity-50 animate-pulse" />
 
-          {/* Floating Panel 1 */}
-          <motion.div
-            style={{ x: compX1, y: compY1, rotateY: -15, rotateX: 10 }}
-            className="absolute z-20 w-64 h-80 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl shadow-2xl p-6 flex flex-col justify-between overflow-hidden"
-          >
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-[#00D4FF] to-[#6C63FF] opacity-80" />
-            <div className="space-y-3">
-              <div className="w-full h-2 bg-white/10 rounded-full" />
-              <div className="w-2/3 h-2 bg-white/10 rounded-full" />
-            </div>
-            
-            {/* Edge Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent opacity-50" />
-          </motion.div>
-
-          {/* Floating Panel 2 (Behind) */}
+          {/* Floating Panel 1: Code Editor (Background/Right) */}
           <motion.div
             style={{ x: compX2, y: compY2, rotateY: 20, rotateX: -10 }}
-            className="absolute z-10 -right-8 -top-8 w-48 h-64 rounded-2xl border border-[#6C63FF]/20 bg-[#0B1020]/80 backdrop-blur-lg shadow-2xl p-6"
+            className="absolute z-10 -right-8 -top-8 w-[340px] h-72 rounded-xl border border-white/10 bg-[#1E1E1E]/95 backdrop-blur-xl shadow-2xl overflow-hidden flex flex-col"
           >
-            {/* Grid pattern inner */}
-            <div 
-              className="absolute inset-0 opacity-20"
-              style={{
-                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)`,
-                backgroundSize: '20px 20px',
-              }}
-            />
-            <div className="absolute bottom-0 right-0 w-24 h-24 bg-[#6C63FF] rounded-full filter blur-[30px] opacity-40" />
+            {/* Editor Header */}
+            <div className="flex items-center justify-between px-4 py-2 bg-[#2D2D2D]/90 border-b border-black/20">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              </div>
+              <div className="flex items-center gap-2 text-xs text-gray-400 font-mono">
+                <span className="text-blue-400">⚡</span> App.tsx
+              </div>
+              <div className="w-12" /> {/* Spacer */}
+            </div>
+            
+            {/* Editor Body */}
+            <div className="flex-1 p-4 font-mono text-[10px] sm:text-xs leading-relaxed text-gray-300 overflow-hidden">
+              <div className="flex">
+                <div className="text-gray-600 select-none pr-4 text-right">
+                  1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8
+                </div>
+                <div>
+                  <span className="text-purple-400">import</span> <span className="text-blue-300">{'{'}</span> useState <span className="text-blue-300">{'}'}</span> <span className="text-purple-400">from</span> <span className="text-green-300">'react'</span>;<br/>
+                  <br/>
+                  <span className="text-purple-400">export default function</span> <span className="text-yellow-200">TechInnovation</span>() {'{'}<br/>
+                  &nbsp;&nbsp;<span className="text-purple-400">const</span> [isFuture, setFuture] = <span className="text-blue-300">useState</span>(<span className="text-orange-300">true</span>);<br/>
+                  <br/>
+                  &nbsp;&nbsp;<span className="text-purple-400">return</span> (<br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-gray-400">&lt;</span><span className="text-blue-400">div</span> <span className="text-blue-200">className</span><span className="text-gray-400">=</span><span className="text-green-300">"build-tomorrow"</span><span className="text-gray-400">&gt;</span><br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-gray-400">&lt;</span><span className="text-blue-400">Rocket</span> <span className="text-gray-400">/&gt;</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Floating Panel 2: Terminal (Foreground/Left) */}
+          <motion.div
+            style={{ x: compX1, y: compY1, rotateY: -15, rotateX: 10 }}
+            className="absolute z-20 w-80 h-64 rounded-xl border border-white/10 bg-black/80 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden"
+          >
+            {/* Terminal Header */}
+            <div className="flex items-center px-4 py-2 bg-white/5 border-b border-white/5">
+              <div className="text-[10px] text-gray-500 font-mono tracking-wider">bash — ~</div>
+            </div>
+            
+            {/* Terminal Body */}
+            <div className="flex-1 p-4 font-mono text-[11px] sm:text-xs text-gray-300 space-y-2">
+              <div className="flex gap-2">
+                <span className="text-green-400">csed@club:~$</span>
+                <span className="text-white">npm run build</span>
+              </div>
+              <div className="text-gray-400">
+                &gt; csed-club-website@1.0.0 build<br/>
+                &gt; tsc -b && vite build
+              </div>
+              <div className="text-blue-400 mt-2">
+                vite v8.1.0 building for production...
+              </div>
+              <div className="text-green-400">
+                ✓ 405 modules transformed.
+              </div>
+              <div className="flex items-center gap-1 mt-2">
+                <span className="text-green-400">csed@club:~$</span>
+                <motion.span 
+                  animate={{ opacity: [1, 0] }} 
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                  className="w-2 h-4 bg-white block"
+                />
+              </div>
+            </div>
           </motion.div>
           
           {/* Decorative Rings */}

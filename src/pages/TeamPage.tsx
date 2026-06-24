@@ -118,9 +118,11 @@ export default function TeamPage() {
               title="Our Patrons"
               description="Eminent leaders providing strategic direction and unwavering support."
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-wrap justify-center gap-8">
               {patrons.map(member => (
-                <TeamCard key={member.id} member={member} />
+                <div key={member.id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm">
+                  <TeamCard member={member} />
+                </div>
               ))}
             </div>
           </section>
@@ -134,9 +136,11 @@ export default function TeamPage() {
               title="Industry Mentors"
               description="Seasoned professionals bridging the gap between academia and industry."
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-wrap justify-center gap-8">
               {mentors.map(member => (
-                <TeamCard key={member.id} member={member} />
+                <div key={member.id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm">
+                  <TeamCard member={member} />
+                </div>
               ))}
             </div>
           </section>
@@ -150,9 +154,11 @@ export default function TeamPage() {
               title="Student Council"
               description="The driving force orchestrating events, projects, and club operations."
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-wrap justify-center gap-8">
               {council.map(member => (
-                <TeamCard key={member.id} member={member} />
+                <div key={member.id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm">
+                  <TeamCard member={member} />
+                </div>
               ))}
             </div>
           </section>

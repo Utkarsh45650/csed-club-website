@@ -43,9 +43,11 @@ export default function TeamPreviewSection() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {previewMembers.map((member) => (
-            <TeamCard key={member.id} member={member} />
+            <div key={member.id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm">
+              <TeamCard member={member} />
+            </div>
           ))}
         </div>
 

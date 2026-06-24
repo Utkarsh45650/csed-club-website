@@ -77,8 +77,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
 
           {/* Body Details */}
-          <div className="p-8 -mt-16 relative z-10">
-            <h2 id="modal-title" className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="p-8 -mt-20 relative z-30">
+            <h2 id="modal-title" className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
               {project.title}
             </h2>
             
