@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Exclude private, internal, or temporary directories if they exist
+Disallow: /api/
+Disallow: /private/
+Disallow: /admin/
+
+# Point crawlers directly to the structured sitemap
+Sitemap: https://csed.example.com/sitemap.xml
