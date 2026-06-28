@@ -65,7 +65,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         </button>
 
         {/* Scrollable Area */}
-        <div className="overflow-y-auto w-full h-full custom-scrollbar">
+        <div 
+          className="flex-1 min-h-0 overflow-y-auto w-full custom-scrollbar overscroll-contain"
+          data-lenis-prevent="true"
+        >
           
           {/* Hero Image */}
           <div className="w-full h-64 md:h-80 relative bg-[#050816]">

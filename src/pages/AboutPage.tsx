@@ -5,6 +5,7 @@ import SectionHeading from '../components/ui/SectionHeading';
 import StatCard from '../components/cards/StatCard';
 import { aboutData } from '../data/aboutData';
 import SEO from '../components/seo/SEO';
+import FadedMemoriesBackground from '../components/sections/FadedMemoriesBackground';
 
 import StaggeredHeadline from '../components/ui/StaggeredHeadline';
 
@@ -54,9 +55,10 @@ export default function AboutPage() {
         title="About Us"
         description="Learn about the CSED Club's mission, vision, and core principles."
       />
+      <FadedMemoriesBackground />
       <div 
         ref={containerRef}
-        className="min-h-screen pt-24 pb-12 overflow-hidden relative"
+        className="min-h-screen pt-24 pb-12 overflow-hidden relative z-10"
         onMouseMove={handleMouseMove}
       >
         {/* 1. Hero Section */}
@@ -126,7 +128,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="p-10 rounded-2xl bg-[#111827] border border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.25)] relative overflow-hidden group"
+              className="p-10 rounded-2xl bg-[#111827]/40 backdrop-blur-md border border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.25)] relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 p-8 opacity-5">
                 <Target size={120} />
@@ -144,7 +146,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: 0.2 }}
-              className="p-10 rounded-2xl bg-[#111827] border border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.25)] relative overflow-hidden group"
+              className="p-10 rounded-2xl bg-[#111827]/40 backdrop-blur-md border border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.25)] relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 p-8 opacity-5">
                 <Lightbulb size={120} />
@@ -166,7 +168,7 @@ export default function AboutPage() {
             title="Our Achievements"
             description="A quick look at our scale and impact across the community."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
             {aboutData.achievements.map((stat, idx) => (
               <StatCard
                 key={idx}
@@ -228,7 +230,7 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ delay: idx * 0.1 }}
-                  className="p-8 bg-[#111827] rounded-2xl border border-white/5 hover:border-white/10 transition-colors"
+                  className="p-8 bg-[#111827]/40 backdrop-blur-md rounded-2xl border border-white/5 hover:border-white/10 transition-colors"
                 >
                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-6">
                     <Icon className="text-[#00D4FF] w-6 h-6" />
@@ -247,7 +249,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="p-10 md:p-16 bg-gradient-to-br from-[#111827] to-[#0B1020] rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden"
+            className="p-10 md:p-16 bg-gradient-to-br from-[#111827]/60 to-[#0B1020]/60 backdrop-blur-md rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden"
           >
             {/* Background Glow */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#6C63FF] opacity-10 blur-[120px] rounded-full pointer-events-none" />

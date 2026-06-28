@@ -5,23 +5,27 @@ import CursorFollower from "./components/effects/CursorFollower";
 import ErrorBoundary from "./components/layout/ErrorBoundary";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return (
-    <ErrorBoundary>
-      <a href="#main-content" className="skip-to-content">
-        Skip to main content
-      </a>
-      <SmoothScroller />
+    <>
       <CursorFollower />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Navbar />
-        <main id="main-content" className="flex-1 w-full" tabIndex={-1}>
-          <AppRoutes />
-        </main>
-      </BrowserRouter>
-    </ErrorBoundary>
+      <ErrorBoundary>
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+        <SmoothScroller />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Navbar />
+          <main id="main-content" className="flex-1 w-full" tabIndex={-1}>
+            <AppRoutes />
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </ErrorBoundary>
+    </>
   );
 }
 

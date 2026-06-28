@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -12,64 +12,8 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// ----------------------------------------------------------------------
-// Container (Inline for completeness, normally in src/components/layout)
-// ----------------------------------------------------------------------
-const Container = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <div className={cn("max-w-7xl mx-auto px-6 md:px-8", className)}>
-    {children}
-  </div>
-);
-
-// ----------------------------------------------------------------------
-// TextWave (Inline for completeness, normally in src/components/effects)
-// ----------------------------------------------------------------------
-const TextWave = ({ text }: { text: string }) => {
-  return (
-    <span className="relative flex overflow-hidden group">
-      <span className="flex transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:-translate-y-full">
-        {text.split('').map((char, i) => (
-          <span key={i} className="inline-block whitespace-pre">
-            {char}
-          </span>
-        ))}
-      </span>
-      <span className="absolute flex transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] translate-y-full group-hover:translate-y-0">
-        {text.split('').map((char, i) => (
-          <span
-            key={i}
-            className="inline-block whitespace-pre"
-            style={{ transitionDelay: `${i * 20}ms` }}
-          >
-            {char}
-          </span>
-        ))}
-      </span>
-    </span>
-  );
-};
-
-// ----------------------------------------------------------------------
-// Button (Inline for completeness, normally in src/components/ui)
-// ----------------------------------------------------------------------
-import type { HTMLMotionProps } from 'framer-motion';
-
-const Button = ({ children, className, ...props }: HTMLMotionProps<"button">) => {
-  return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={cn(
-        "relative px-4 py-2 rounded-md font-medium text-sm transition-colors duration-200",
-        "bg-[#00D4FF] text-[#050816] hover:bg-[#00FFC8] shadow-[0_0_20px_rgba(0,212,255,0.3)]",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
-};
+import Container from './Container';
+import TextWave from '../effects/TextWave';
 
 // ----------------------------------------------------------------------
 // Main Navbar Component
@@ -124,7 +68,7 @@ export default function Navbar() {
           
           {/* Logo - Left */}
           <Link to="/" className="relative z-50 flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-sm bg-gradient-to-tr from-[#00D4FF] to-[#6C63FF] shadow-[0_0_15px_rgba(0,212,255,0.4)] transition-transform duration-300 group-hover:scale-110" />
+            <img src="/assets/logo.jpg" alt="CSED Logo" className="h-8 w-auto rounded-sm object-contain shadow-[0_0_15px_rgba(0,212,255,0.4)] transition-transform duration-300 group-hover:scale-110" />
             <span className="text-xl font-bold tracking-tight text-white">
               CSED<span className="text-[#00D4FF]">.</span>
             </span>
@@ -157,10 +101,7 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* CTA Button - Right (Desktop) */}
-          <div className="hidden md:block">
-            <Button>Apply Now</Button>
-          </div>
+          {/* Removed CTA Button */}
 
           {/* Hamburger - Mobile */}
           <button
@@ -173,65 +114,63 @@ export default function Navbar() {
           </button>
 
         </Container>
-      </motion.nav>
 
-      {/* Mobile Fullscreen Drawer */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            ref={drawerRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile Navigation"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-[#050816] flex flex-col pt-24 px-6 md:hidden"
-          >
-            {/* Background Orb for Drawer */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle_at_center,rgba(108,99,255,0.2)_0%,transparent_70%)] rounded-full mix-blend-screen pointer-events-none" />
-
-            <div className="flex flex-col gap-6 relative z-10">
-              {navLinks.map((link, i) => {
-                const isActive = location.pathname === link.path;
-                return (
-                  <motion.div
-                    key={link.path}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 + 0.1 }}
-                  >
-                    <Link
-                      to={link.path}
-                      className="group flex items-center justify-between border-b border-white/5 pb-4"
-                    >
-                      <span className={cn(
-                        "text-3xl font-semibold tracking-tight",
-                        isActive ? "text-white" : "text-gray-400"
-                      )}>
-                        {link.label}
-                      </span>
-                      {isActive && (
-                        <div className="w-2 h-2 rounded-full bg-[#00D4FF] shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
-                      )}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
-
+        {/* Mobile Dropdown Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-auto pb-12 relative z-10"
+              ref={drawerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile Navigation"
+              initial={{ opacity: 0, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="absolute top-[80px] right-6 w-56 md:hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] origin-top-right z-50 rounded-2xl"
             >
-              <Button className="w-full py-4 text-lg">Apply Now</Button>
+              {/* Separate background layer to fix Safari/Mobile backdrop-filter bug with Framer Motion transforms */}
+              <div 
+                className="absolute inset-0 bg-[#0B1020]/80 rounded-2xl border border-white/10"
+                style={{ 
+                  backdropFilter: 'blur(64px)',
+                  WebkitBackdropFilter: 'blur(64px)'
+                }}
+              />
+              
+              <div className="flex flex-col p-2 relative z-10">
+                {navLinks.map((link, i) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <motion.div
+                      key={link.path}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                    >
+                      <Link
+                        to={link.path}
+                        className={cn(
+                          "group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200",
+                          isActive ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white"
+                        )}
+                      >
+                        <span className="text-sm font-medium tracking-tight">
+                          {link.label}
+                        </span>
+                        {isActive && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+
+              </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </motion.nav>
     </>
   );
 }

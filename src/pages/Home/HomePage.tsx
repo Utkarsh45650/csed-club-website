@@ -1,5 +1,6 @@
 import SEO from '../../components/seo/SEO';
 import HeroSection from '../../components/sections/HeroSection';
+import DescriptionCardSection from '../../components/sections/DescriptionCardSection';
 import StatisticsSection from '../../components/sections/StatisticsSection';
 import AboutPreviewSection from '../../components/sections/AboutPreviewSection';
 import FeaturedProjectsSection from '../../components/sections/FeaturedProjectsSection';
@@ -15,6 +16,7 @@ export default function HomePage() {
       />
       <div className="flex flex-col w-full">
         <HeroSection />
+        <DescriptionCardSection />
         <StatisticsSection />
         <AboutPreviewSection />
         <FeaturedProjectsSection />

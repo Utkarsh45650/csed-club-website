@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, MessageCircle, Code2, Mail } from 'lucide-react';
 import type { TeamMember, SocialLink } from '../../data/teamData';
@@ -7,7 +8,7 @@ import ImageWithSkeleton from '../ui/ImageWithSkeleton';
 // Social Icon Mapping
 // ----------------------------------------------------------------------
 const getSocialIcon = (platform: SocialLink['platform']) => {
-  const iconMap: Record<string, React.ElementType> = {
+  const iconMap: Record<string, any> = {
     linkedin: Briefcase,
     twitter: MessageCircle,
     github: Code2,
@@ -19,18 +20,30 @@ const getSocialIcon = (platform: SocialLink['platform']) => {
 };
 
 export default function TeamCard({ member }: { member: TeamMember }) {
+  const [isActive, setIsActive] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const showDetails = isActive || isHovered;
+
   return (
     <motion.div
-      whileHover="hover"
-      className="group relative flex flex-col bg-[#111827] rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      onClick={() => setIsActive(!isActive)}
+      className="group relative flex flex-col bg-[#111827] rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.25)] cursor-pointer"
     >
-      {/* Glow Border on Hover */}
-      <div className="absolute inset-0 border-2 border-transparent rounded-2xl opacity-0 group-hover:opacity-100 group-hover:border-[#00D4FF]/50 shadow-[0_0_0px_rgba(0,212,255,0)] group-hover:shadow-[0_0_30px_rgba(0,212,255,0.2)] transition-all duration-500 z-20 pointer-events-none" />
+      {/* Glow Border on Hover / Active */}
+      <div 
+        className={`absolute inset-0 border-2 border-transparent rounded-2xl transition-all duration-500 z-20 pointer-events-none ${
+          showDetails 
+            ? 'opacity-100 border-[#00D4FF]/50 shadow-[0_0_30px_rgba(0,212,255,0.2)]' 
+            : 'opacity-0 shadow-[0_0_0px_rgba(0,212,255,0)]'
+        }`} 
+      />
 
       <motion.div 
-        variants={{
-          hover: { y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }
-        }}
+        animate={showDetails ? { y: -8 } : { y: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className="flex flex-col h-full"
       >
         {/* Profile Image Wrapper */}
@@ -39,20 +52,19 @@ export default function TeamCard({ member }: { member: TeamMember }) {
             src={member.image} 
             alt={member.name}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-            variants={{
-              hover: { scale: 1.05, transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } }
-            }}
-            imageClassName="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter grayscale group-hover:grayscale-0"
+            imageClassName={`w-full h-full object-cover transition-all duration-500 ${
+              showDetails 
+                ? 'opacity-100 filter-none grayscale-0 scale-105' 
+                : 'opacity-80 filter grayscale scale-100'
+            }`}
           />
           {/* Subtle gradient overlay to ensure text readability if overlaid */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/20 to-transparent" />
           
-          {/* Social Reveal (Slides up from the bottom of the image on hover) */}
+          {/* Social Reveal (Slides up from the bottom of the image on hover / active) */}
           <motion.div 
-            variants={{
-              hover: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 300, damping: 25 } }
-            }}
-            initial={{ y: 20, opacity: 0 }}
+            animate={showDetails ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-20"
           >
             {member.socials.map((social, idx) => (
@@ -61,6 +73,7 @@ export default function TeamCard({ member }: { member: TeamMember }) {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()} // Prevent card click when clicking social link
                 className="p-2.5 bg-black/50 hover:bg-[#00D4FF] hover:text-black rounded-full text-white backdrop-blur-md border border-white/10 transition-colors shadow-lg"
               >
                 {getSocialIcon(social.platform)}

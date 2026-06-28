@@ -3,7 +3,10 @@ import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } fro
 import SEO from '../components/seo/SEO';
 import SectionHeading from '../components/ui/SectionHeading';
 import EventCard from '../components/cards/EventCard';
-import { events } from '../data/eventData';
+import { events, type Event } from '../data/eventData';
+import { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import EventModal from '../components/ui/EventModal';
 
 import StaggeredHeadline from '../components/ui/StaggeredHeadline';
 
@@ -11,6 +14,7 @@ import StaggeredHeadline from '../components/ui/StaggeredHeadline';
 // Main Events Page Component
 // ----------------------------------------------------------------------
 export default function EventsPage() {
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -121,7 +125,7 @@ export default function EventsPage() {
             />
             <div className="flex flex-col gap-6 max-w-4xl">
               {ongoingEvents.map(event => (
-                <EventCard key={event.id} event={event} />
+                <EventCard key={event.id} event={event} onClick={() => setSelectedEvent(event)} />
               ))}
             </div>
           </section>
@@ -137,7 +141,7 @@ export default function EventsPage() {
             />
             <div className="flex flex-col gap-6 max-w-4xl">
               {upcomingEvents.map(event => (
-                <EventCard key={event.id} event={event} />
+                <EventCard key={event.id} event={event} onClick={() => setSelectedEvent(event)} />
               ))}
             </div>
           </section>
@@ -168,7 +172,7 @@ export default function EventsPage() {
                     {/* Timeline Connector Line Glow */}
                     <div className="absolute -left-[30px] md:-left-[46px] top-12 bottom-[-48px] w-[1px] bg-gradient-to-b from-[#6C63FF]/30 to-transparent z-10" />
 
-                    <EventCard event={event} />
+                    <EventCard event={event} onClick={() => setSelectedEvent(event)} />
                   </motion.div>
                 ))}
               </div>
@@ -178,6 +182,12 @@ export default function EventsPage() {
 
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedEvent && (
+          <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

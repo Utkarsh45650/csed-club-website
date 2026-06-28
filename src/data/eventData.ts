@@ -7,6 +7,11 @@ export interface Event {
   status: 'upcoming' | 'ongoing' | 'completed';
   registrationUrl?: string;
   description?: string;
+  longDescription?: string;
+  time?: string;
+  skillsLearned?: string[];
+  tags?: string[];
+  imagesLink?: string;
 }
 
 export const events: Event[] = [
@@ -48,7 +53,12 @@ export const events: Event[] = [
     banner: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80",
     status: "completed",
     registrationUrl: "#",
-    description: "A beginner-friendly session breaking down the mathematics and architecture behind modern neural networks."
+    description: "A beginner-friendly session breaking down the mathematics and architecture behind modern neural networks.",
+    longDescription: "Neural networks are the backbone of modern AI. In this comprehensive workshop, we explored the mathematical foundations of perceptrons, backpropagation, and activation functions. Attendees built their first feedforward network from scratch and learned how to optimize hyperparameters for better accuracy.",
+    time: "4:00 PM - 7:00 PM",
+    skillsLearned: ["Understanding Neural Network Architecture", "Implementing Backpropagation", "PyTorch Basics", "Model Evaluation"],
+    tags: ["Artificial Intelligence", "Machine Learning", "PyTorch", "Workshop"],
+    imagesLink: "https://drive.google.com/"
   },
   {
     id: "5",
@@ -58,6 +68,11 @@ export const events: Event[] = [
     banner: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80",
     status: "completed",
     registrationUrl: "#",
-    description: "A 24-hour intense CTF competition featuring web exploitation, reverse engineering, and cryptography challenges."
+    description: "A 24-hour intense CTF competition featuring web exploitation, reverse engineering, and cryptography challenges.",
+    longDescription: "Our annual Capture The Flag event brought together over 100 cybersecurity enthusiasts. Participants competed in a 24-hour marathon solving challenges across various domains including Web Exploitation, Reverse Engineering, Forensics, and Cryptography. The event provided hands-on experience with real-world security vulnerabilities and mitigation strategies.",
+    time: "10:00 AM (Sat) - 10:00 AM (Sun)",
+    skillsLearned: ["Web Exploitation", "Cryptography", "Reverse Engineering", "Network Analysis"],
+    tags: ["Cybersecurity", "CTF", "Competition", "Hacking"],
+    imagesLink: "https://drive.google.com/"
   }
 ];

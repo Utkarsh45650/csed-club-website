@@ -4,6 +4,17 @@
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* Hide native cursor globally on devices with mouse/trackpad */
+@media (pointer: fine) {
+  *:not(.error-screen):not(.error-screen *):not(.force-cursor):not(.force-cursor *) {
+    cursor: none !important;
+  }
+}
+
+.error-screen, .error-screen * {
+  cursor: auto !important;
+}
+
 @layer utilities {
   /* Accessibility: Global Focus States */
   *:focus-visible {

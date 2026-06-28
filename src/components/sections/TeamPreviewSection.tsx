@@ -10,12 +10,14 @@ import TeamCard from '../cards/TeamCard';
 // ----------------------------------------------------------------------
 export default function TeamPreviewSection() {
   // Extract one of each category for the preview
+  const chiefPatronPreview = teamMembers.find(m => m.category === 'chief-patron');
   const patronPreview = teamMembers.find(m => m.category === 'patron');
   const mentorPreview = teamMembers.find(m => m.category === 'mentor');
-  const councilPreview = teamMembers.filter(m => m.category === 'council').slice(0, 2);
+  const councilPreview = teamMembers.filter(m => m.category === 'council').slice(0, 1);
 
   // Combine them into a single array for rendering
   const previewMembers = [
+    ...(chiefPatronPreview ? [chiefPatronPreview] : []),
     ...(patronPreview ? [patronPreview] : []),
     ...(mentorPreview ? [mentorPreview] : []),
     ...councilPreview

@@ -8,11 +8,22 @@ export interface TeamMember {
   name: string;
   role: string;
   image: string;
-  category: 'patron' | 'mentor' | 'council';
+  category: 'chief-patron' | 'patron' | 'mentor' | 'council';
   socials: SocialLink[];
 }
 
 export const teamMembers: TeamMember[] = [
+  {
+    id: "cp1",
+    name: "Dr. Robert Smith",
+    role: "Chief Patron",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80",
+    category: "chief-patron",
+    socials: [
+      { platform: "linkedin", url: "#" },
+      { platform: "email", url: "mailto:#" }
+    ]
+  },
   {
     id: "p1",
     name: "Dr. Sarah Chen",

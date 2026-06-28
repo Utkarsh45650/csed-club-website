@@ -9,14 +9,19 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export default function EventCard({ event }: { event: Event }) {
+export default function EventCard({ event, onClick }: { event: Event, onClick?: () => void }) {
   const isOngoing = event.status === 'ongoing';
+  const isCompleted = event.status === 'completed';
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.div
+      onClick={onClick}
       whileHover="hover"
-      className="group relative flex flex-col md:flex-row bg-[#111827] rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.25)] h-full"
+      className={cn(
+        "group relative flex flex-col md:flex-row bg-[#111827] rounded-2xl border border-white/5 overflow-hidden transition-all duration-300 shadow-[0_10px_40px_rgba(0,0,0,0.25)] h-full",
+        onClick ? "cursor-pointer" : ""
+      )}
     >
       {/* 
         Animated Border on Hover 
@@ -88,18 +93,27 @@ export default function EventCard({ event }: { event: Event }) {
             </div>
 
             {/* Action Button */}
-            <a 
-              href={event.registrationUrl}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300",
-                isOngoing 
-                  ? "bg-[#00FFC8]/10 text-[#00FFC8] border border-[#00FFC8]/20 hover:bg-[#00FFC8] hover:text-black shadow-[0_0_15px_rgba(0,255,200,0.2)]"
-                  : "bg-white/5 text-white border border-white/10 hover:bg-[#00D4FF] hover:text-black hover:border-[#00D4FF] hover:shadow-[0_0_15px_rgba(0,212,255,0.3)]"
-              )}
-            >
-              {isOngoing ? "Join Now" : "Register"}
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </a>
+            {!isCompleted && (
+              (event.registrationUrl && event.registrationUrl !== "#") ? (
+                <a 
+                  href={event.registrationUrl}
+                  onClick={(e) => onClick && e.stopPropagation()}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300",
+                    isOngoing 
+                      ? "bg-[#00FFC8]/10 text-[#00FFC8] border border-[#00FFC8]/20 hover:bg-[#00FFC8] hover:text-black shadow-[0_0_15px_rgba(0,255,200,0.2)]"
+                      : "bg-white/5 text-white border border-white/10 hover:bg-[#00D4FF] hover:text-black hover:border-[#00D4FF] hover:shadow-[0_0_15px_rgba(0,212,255,0.3)]"
+                  )}
+                >
+                  {isOngoing ? "View Now" : "Register"}
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </a>
+              ) : !isOngoing ? (
+                <div className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-white/5 text-gray-500 border border-white/10 cursor-not-allowed select-none">
+                  Coming Soon
+                </div>
+              ) : null
+            )}
           </div>
         </div>
       </motion.div>

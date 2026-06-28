@@ -11,6 +11,7 @@ import StaggeredHeadline from '../components/ui/StaggeredHeadline';
 // Main Team Page Component
 // ----------------------------------------------------------------------
 export default function TeamPage() {
+  const chiefPatrons = teamMembers.filter(m => m.category === 'chief-patron');
   const patrons = teamMembers.filter(m => m.category === 'patron');
   const mentors = teamMembers.filter(m => m.category === 'mentor');
   const council = teamMembers.filter(m => m.category === 'council');
@@ -109,6 +110,24 @@ export default function TeamPage() {
 
       {/* ---------------- 2-4. MAIN SECTIONS ---------------- */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-24 space-y-32">
+        
+        {/* Chief Patrons Section */}
+        {chiefPatrons.length > 0 && (
+          <section>
+            <SectionHeading 
+              eyebrow="Vision"
+              title="Chief Patron"
+              description="The highest guiding authority of the CSED Club."
+            />
+            <div className="flex flex-wrap justify-center gap-8">
+              {chiefPatrons.map(member => (
+                <div key={member.id} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-sm">
+                  <TeamCard member={member} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
         
         {/* Patrons Section */}
         {patrons.length > 0 && (
