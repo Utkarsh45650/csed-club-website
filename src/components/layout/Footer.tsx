@@ -107,7 +107,7 @@ export default function Footer() {
                       whileHover={{ scale: 1.08, rotate: -5, y: -2 }}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
+                      viewport={{ }}
                       transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
                     >
                       <Icon className="w-[18px] h-[18px] relative z-10" />
@@ -131,7 +131,7 @@ export default function Footer() {
                     key={link.path}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ }}
                     transition={{ delay: 0.4 + i * 0.1 }}
                   >
                     <Link
@@ -161,7 +161,7 @@ export default function Footer() {
                     key={link.label}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ }}
                     transition={{ delay: 0.5 + i * 0.1 }}
                   >
                     <Link

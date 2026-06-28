@@ -36,7 +36,7 @@ const statsData = [
 
 export default function StatisticsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(containerRef, { once: true, margin: "-100px" });
+  const inView = useInView(containerRef, { margin: "-100px" });
 
   return (
     <section className="relative w-full py-24 bg-[#050816]">

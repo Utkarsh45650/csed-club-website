@@ -127,7 +127,7 @@ export default function AboutPage() {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ margin: "-100px" }}
               className="p-10 rounded-2xl bg-[#111827]/40 backdrop-blur-md border border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.25)] relative overflow-hidden group"
             >
               <div className="absolute top-0 right-0 p-8 opacity-5">
@@ -144,7 +144,7 @@ export default function AboutPage() {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ margin: "-100px" }}
               transition={{ delay: 0.2 }}
               className="p-10 rounded-2xl bg-[#111827]/40 backdrop-blur-md border border-white/5 shadow-[0_10px_40px_rgba(0,0,0,0.25)] relative overflow-hidden group"
             >
@@ -195,7 +195,7 @@ export default function AboutPage() {
                   key={idx} 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ margin: "-100px" }}
                   transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
                   className="relative group"
                 >
@@ -228,7 +228,7 @@ export default function AboutPage() {
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ margin: "-100px" }}
                   transition={{ delay: idx * 0.1 }}
                   className="p-8 bg-[#111827]/40 backdrop-blur-md rounded-2xl border border-white/5 hover:border-white/10 transition-colors"
                 >
@@ -248,7 +248,7 @@ export default function AboutPage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ margin: "-100px" }}
             className="p-10 md:p-16 bg-gradient-to-br from-[#111827]/60 to-[#0B1020]/60 backdrop-blur-md rounded-3xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden"
           >
             {/* Background Glow */}

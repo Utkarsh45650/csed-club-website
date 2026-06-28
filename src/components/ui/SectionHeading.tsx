@@ -17,7 +17,7 @@ export interface SectionHeadingProps {
 
 export default function SectionHeading({ eyebrow, title, description, align = 'left', className }: SectionHeadingProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { margin: "-100px" });
 
   const container = {
     hidden: { opacity: 0 },
@@ -28,8 +28,8 @@ export default function SectionHeading({ eyebrow, title, description, align = 'l
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" as any } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as any } }
   };
 
   return (

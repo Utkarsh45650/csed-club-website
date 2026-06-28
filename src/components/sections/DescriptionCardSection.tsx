@@ -30,7 +30,7 @@ export default function DescriptionCardSection() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
+              viewport={{ }}
               transition={{ duration: 0.8, type: "spring" }}
               className="absolute -top-12 -right-12 sm:top-8 sm:right-8 w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 z-20 pointer-events-none opacity-30 sm:opacity-100"
             >

@@ -10,7 +10,7 @@ interface RevealProps {
 
 export default function Reveal({ children, width = '100%', delay = 0, className = '' }: RevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { margin: "-50px" });
   const shouldReduceMotion = useReducedMotion();
 
   return (

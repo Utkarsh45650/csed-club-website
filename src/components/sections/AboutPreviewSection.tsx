@@ -7,7 +7,7 @@ import { aboutData } from '../../data/aboutData';
 
 export default function AboutPreviewSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(containerRef, { once: true, margin: "-100px" });
+  const inView = useInView(containerRef, { margin: "-100px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
