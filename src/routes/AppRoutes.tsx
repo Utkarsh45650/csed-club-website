@@ -12,6 +12,7 @@ const ProjectsPage = lazy(() => import("../pages/ProjectsPage"));
 const EventsPage = lazy(() => import("../pages/EventsPage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
+const ComingSoonPage = lazy(() => import("../pages/ComingSoonPage"));
 
 
 const AppRoutes = () => {
@@ -67,6 +68,16 @@ const AppRoutes = () => {
             <PageTransition>
               <Suspense fallback={<PageLoader />}>
                 <AboutPage />
+              </Suspense>
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/coming-soon" 
+          element={
+            <PageTransition>
+              <Suspense fallback={<PageLoader />}>
+                <ComingSoonPage />
               </Suspense>
             </PageTransition>
           } 

@@ -43,7 +43,7 @@ const NAV_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
-  { label: 'Join Club', path: '#' },
+  { label: 'Join Club', path: '/coming-soon' },
   { label: 'Gallery', path: '#' },
   { label: 'Achievements', path: '#' },
   { label: 'Contact', path: '#' },
@@ -78,20 +78,20 @@ export default function Footer() {
 
       <Container className="relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6 lg:gap-8 mb-16">
-          
+
           {/* Column 1: Brand */}
           <Reveal delay={0.1} className="col-span-2 lg:col-span-1">
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <Link to="/" className="flex items-center gap-2 group mb-6">
-                <img src="/assets/logo.jpg" alt="CSED Logo" className="h-8 w-auto rounded-sm object-contain shadow-[0_0_15px_rgba(0,212,255,0.4)] transition-transform duration-300 group-hover:scale-110" />
+                {/* <img src="/assets/logo.jpg" alt="CSED Logo" className="h-8 w-auto rounded-sm object-contain shadow-[0_0_15px_rgba(0,212,255,0.4)] transition-transform duration-300 group-hover:scale-110" /> */}
                 <span className="text-xl font-bold tracking-tight text-white">
-                  CSED<span className="text-[#00D4FF]">.</span>
+                  CSED Club<span className="text-[#00D4FF]">.</span>
                 </span>
               </Link>
               <p className="text-[#9CA3AF] text-sm leading-relaxed mb-6 max-w-xs">
                 Empowering students to build the future. We turn bold ideas into production-ready software.
               </p>
-              
+
               {/* Social Icons */}
               <div className="flex items-center gap-4">
                 {SOCIAL_LINKS.map((social, index) => {
@@ -107,7 +107,7 @@ export default function Footer() {
                       whileHover={{ scale: 1.08, rotate: -5, y: -2 }}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ }}
+                      viewport={{}}
                       transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
                     >
                       <Icon className="w-[18px] h-[18px] relative z-10" />
@@ -131,7 +131,7 @@ export default function Footer() {
                     key={link.path}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ }}
+                    viewport={{}}
                     transition={{ delay: 0.4 + i * 0.1 }}
                   >
                     <Link
@@ -161,18 +161,27 @@ export default function Footer() {
                     key={link.label}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ }}
+                    viewport={{}}
                     transition={{ delay: 0.5 + i * 0.1 }}
                   >
-                    <Link
-                      to={link.path}
-                      className="group flex items-center text-[#9CA3AF] hover:text-white transition-colors duration-300 text-sm py-1 outline-none focus-visible:ring-2 focus-visible:ring-[#00D4FF] rounded-sm"
-                    >
-                      <span className="relative overflow-hidden">
-                        <TextWave text={link.label} />
-                        <span className="absolute left-0 bottom-0 w-full h-[1px] bg-[#00D4FF] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
-                      </span>
-                    </Link>
+                    {link.path.startsWith('http') ? (
+                      <a href={link.path} target="_blank" rel="noopener noreferrer" className="group flex items-center text-[#9CA3AF] hover:text-white transition-colors duration-300 text-sm py-1 outline-none focus-visible:ring-2 focus-visible:ring-[#00D4FF] rounded-sm">
+                        <span className="relative overflow-hidden">
+                          <TextWave text={link.label} />
+                          <span className="absolute left-0 bottom-0 w-full h-[1px] bg-[#00D4FF] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        className="group flex items-center text-[#9CA3AF] hover:text-white transition-colors duration-300 text-sm py-1 outline-none focus-visible:ring-2 focus-visible:ring-[#00D4FF] rounded-sm"
+                      >
+                        <span className="relative overflow-hidden">
+                          <TextWave text={link.label} />
+                          <span className="absolute left-0 bottom-0 w-full h-[1px] bg-[#00D4FF] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]" />
+                        </span>
+                      </Link>
+                    )}
                   </motion.li>
                 ))}
               </ul>
@@ -185,7 +194,7 @@ export default function Footer() {
               <h3 className="text-xs font-semibold tracking-widest text-[#00D4FF] uppercase mb-6">
                 Stay Connected
               </h3>
-              
+
               <div className="w-full max-w-xs mb-8">
                 <form className="relative flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
                   <div className="relative group">
@@ -223,11 +232,11 @@ export default function Footer() {
         <Reveal delay={0.6}>
           <div className="pt-8 mt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#9CA3AF]">
             <p>© {currentYear} CSED Tech Club. All rights reserved.</p>
-            
+
             <p className="flex items-center gap-1">
               Built with <span className="text-red-500 animate-pulse">❤️</span> by Tech Club
             </p>
-            
+
             <div className="flex items-center gap-6">
               <Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link to="#" className="hover:text-white transition-colors">Terms of Service</Link>

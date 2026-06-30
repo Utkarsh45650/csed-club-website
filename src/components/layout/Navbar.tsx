@@ -30,7 +30,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  
+
   const drawerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(drawerRef, isMobileMenuOpen);
 
@@ -65,19 +65,33 @@ export default function Navbar() {
         )}
       >
         <Container className="flex items-center justify-between">
-          
+
           {/* Logo - Left */}
-          <Link to="/" className="relative z-50 flex items-center gap-2 group">
-            <img src="/assets/logo.jpg" alt="CSED Logo" className="h-8 w-auto rounded-sm object-contain shadow-[0_0_15px_rgba(0,212,255,0.4)] transition-transform duration-300 group-hover:scale-110" />
-            <span className="text-xl font-bold tracking-tight text-white">
-              CSED<span className="text-[#00D4FF]">.</span>
-            </span>
+          <Link to="/" className="relative z-50 flex items-center gap-8 group">
+            <img src="/assets/GLA_Logo.png" alt="GLA Logo" className="h-15 w-auto rounded-sm object-contain transition-transform duration-300 group-hover:scale-110" />
+            <img src="/assets/logo.jpg" alt="CSED Club Logo" className="h-10 w-auto rounded-sm object-contain shadow-[0_0_15px_rgba(0,212,255,0.4)] transition-transform duration-300 group-hover:scale-110" />
           </Link>
 
           {/* Navigation - Center (Desktop) */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
+              if (link.path.startsWith('http')) {
+                return (
+                  <a
+                    key={link.path}
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative px-1 py-2 text-sm font-medium transition-colors"
+                  >
+                    <span className="relative z-10 text-gray-300 hover:text-white">
+                      <TextWave text={link.label} />
+                    </span>
+                  </a>
+                );
+              }
+
               return (
                 <Link
                   key={link.path}
@@ -87,7 +101,7 @@ export default function Navbar() {
                   <span className={cn("relative z-10", isActive ? "text-white" : "text-gray-300 hover:text-white")}>
                     <TextWave text={link.label} />
                   </span>
-                  
+
                   {/* Active Indicator / Gradient Underline */}
                   {isActive && (
                     <motion.div
@@ -130,17 +144,19 @@ export default function Navbar() {
               className="absolute top-[80px] right-6 w-56 md:hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] origin-top-right z-50 rounded-2xl"
             >
               {/* Separate background layer to fix Safari/Mobile backdrop-filter bug with Framer Motion transforms */}
-              <div 
+              <div
                 className="absolute inset-0 bg-[#0B1020]/80 rounded-2xl border border-white/10"
-                style={{ 
+                style={{
                   backdropFilter: 'blur(64px)',
                   WebkitBackdropFilter: 'blur(64px)'
                 }}
               />
-              
+
               <div className="flex flex-col p-2 relative z-10">
                 {navLinks.map((link, i) => {
                   const isActive = location.pathname === link.path;
+                  const isExternal = link.path.startsWith('http');
+                  
                   return (
                     <motion.div
                       key={link.path}
@@ -148,20 +164,33 @@ export default function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.05 }}
                     >
-                      <Link
-                        to={link.path}
-                        className={cn(
-                          "group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200",
-                          isActive ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white"
-                        )}
-                      >
-                        <span className="text-sm font-medium tracking-tight">
-                          {link.label}
-                        </span>
-                        {isActive && (
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
-                        )}
-                      </Link>
+                      {isExternal ? (
+                        <a
+                          href={link.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 text-gray-300 hover:bg-white/5 hover:text-white"
+                        >
+                          <span className="text-sm font-medium tracking-tight">
+                            {link.label}
+                          </span>
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.path}
+                          className={cn(
+                            "group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200",
+                            isActive ? "bg-white/10 text-white" : "text-gray-300 hover:bg-white/5 hover:text-white"
+                          )}
+                        >
+                          <span className="text-sm font-medium tracking-tight">
+                            {link.label}
+                          </span>
+                          {isActive && (
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00D4FF] shadow-[0_0_10px_rgba(0,212,255,0.8)]" />
+                          )}
+                        </Link>
+                      )}
                     </motion.div>
                   );
                 })}

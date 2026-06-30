@@ -9,6 +9,7 @@ import TypingCodePanel from '../ui/TypingCodePanel';
 
 // ----------------------------------------------------------------------
 // Main Hero Section Component
+// Force Vite HMR refresh
 // ----------------------------------------------------------------------
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -104,18 +105,28 @@ export default function HeroSection() {
           >
             <span className="w-2 h-2 rounded-full bg-[#00FFC8] animate-pulse" />
             <span className="text-xs font-semibold tracking-wider text-gray-300 uppercase">
-              The Future of Engineering
+              The Future of Engineering With CSED Club
             </span>
           </motion.div>
 
           {/* Headline */}
-          <StaggeredHeadline text="Innovating the digital frontier." />
+          <StaggeredHeadline text="CSED Club" />
+
+          {/* Sub-Headline / Punchline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.8 }}
+            className="text-xl md:text-2xl text-[#00D4FF] max-w-lg leading-relaxed font-semibold mt-2"
+          >
+            Innovating the digital frontier.
+          </motion.p>
 
           {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.8 }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.9 }}
             className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed"
           >
             Join the brightest minds building the next generation of technology.
@@ -131,7 +142,7 @@ export default function HeroSection() {
           >
             <Button
               variant="primary"
-              onClick={() => window.open('#apply', '_blank')}
+              onClick={() => window.location.href = '/coming-soon'}
             >
               Apply for Membership
             </Button>
